@@ -1,0 +1,23 @@
+# MATLAB temporary files
+*.asv
+*.mex*
+*.mat
+*.fig
+*.mlappinstall
+*.mlx~
+
+# Backup and autosave files
+*~
+*.bak
+
+# Logs and reports
+*.log
+*.txt
+
+# User-specific settings
+*.prj
+*.m~ 
+
+# OS-specific
+.DS_Store
+Thumbs.db
