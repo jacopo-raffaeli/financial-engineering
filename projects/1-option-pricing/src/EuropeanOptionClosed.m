@@ -18,8 +18,10 @@ function optionPrice = EuropeanOptionClosed(F0, K, B, T, sigma, flag)
     
     % Select the appropriate price based on the flag
     if flag == 1
+        % Call option price
         optionPrice = callPrice;
     elseif flag == -1
+        % Put option price
         optionPrice = putPrice;
     else
         error('Invalid flag. Use +1 for call option and -1 for put option.');
