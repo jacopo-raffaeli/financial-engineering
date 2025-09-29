@@ -4,8 +4,7 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
     % Inputs:
     %   F0    - Current forward price of the underlying asset
     %   K     - Strike price of the option
-    %   B     - Annualized continuously compounded risk-free rate of return over life of the option
-    %   T     - Time to maturity (in years)
+    %   B     - Discount factor
     %   sigma - Volatility of the underlying asset (annualized)
     %   N     - Number of time steps in the binomial tree
     %   flag  - '+1' for call option, '-1' for put option
@@ -20,8 +19,7 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
     u = exp(sigma * sqrt(dt));
     d = 1 / u;
     % Risk-neutral probability
-    a = exp(B * dt);
-    p = (a - d) / (u - d);
+    p = (1 - d) / (u - d);
     
     % Compute asset prices at maturity
     assetPrices = zeros(N + 1, 1);
@@ -42,6 +40,6 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
 
     % Backward induction to calculate option price at the root
     for step = N:-1:1
-        optionValues = exp(-B * dt) * (p * optionValues(2:step + 1) + (1 - p) * optionValues(1:step));
+        optionValues = (p * optionValues(2:step + 1) + (1 - p) * optionValues(1:step));
     end
-    optionPrice = optionValues(1);
+    optionPrice = B * optionValues(1);

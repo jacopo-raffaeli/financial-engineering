@@ -4,7 +4,7 @@ function optionPrice = EuropeanOptionMC(F0, K, B, T, sigma, N, flag)
     % Inputs:
     %   F0    - Current forward price of the underlying asset
     %   K     - Strike price of the option
-    %   B     - Annualized continuously compounded risk-free rate of return over life of the option
+    %   B     - Discount factor
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
     %   N     - Number of simulations
@@ -17,7 +17,7 @@ function optionPrice = EuropeanOptionMC(F0, K, B, T, sigma, N, flag)
     Z = randn(N, 1);
 
     % Simulate the underlying asset price at maturity
-    FT = F0 * exp((B - 0.5 * sigma^2) * T + sigma * sqrt(T) * Z);
+    FT = F0 * exp(( - 0.5 * sigma^2) * T + sigma * sqrt(T) * Z);
 
     % Calculate the payoff for each simulation
     if flag == 1
@@ -31,6 +31,6 @@ function optionPrice = EuropeanOptionMC(F0, K, B, T, sigma, N, flag)
     end
 
     % Discount the average payoff back to present value
-    optionPrice = exp(-B * T) * mean(payoffs);
+    optionPrice = B * mean(payoffs);
     
 end
