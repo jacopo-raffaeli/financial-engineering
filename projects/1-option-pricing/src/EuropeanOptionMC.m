@@ -1,4 +1,4 @@
-function optionPrice = EuropeanOptionMC(F0, K, B, T, sigma, N, flag) 
+function [optionPrice, std] = EuropeanOptionMC(F0, K, B, T, sigma, N, flag) 
     % EuropeanOptionMC computes the price of a European option using Monte Carlo simulation.
 
     % Inputs:
@@ -12,6 +12,7 @@ function optionPrice = EuropeanOptionMC(F0, K, B, T, sigma, N, flag)
 
     % Outputs:
     %   optionPrice - The computed price of the European option
+    %   std         - The standard error of the Monte Carlo estimate
 
     % Generate N standard normal random variables
     Z = randn(N, 1);
@@ -32,5 +33,9 @@ function optionPrice = EuropeanOptionMC(F0, K, B, T, sigma, N, flag)
 
     % Discount the average payoff back to present value
     optionPrice = B * mean(payoffs);
-    
+
+    % Compute variance and standard deviation of the payoffs
+    var = (1/(N*(N-1)))*sum((payoffs - mean(payoffs)).^2);
+    std = sqrt(var);
+
 end
