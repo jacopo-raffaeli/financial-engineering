@@ -1,6 +1,6 @@
 function optionPrice = EuropeanOptionClosed(F0, K, B, T, sigma, flag)
     % EuropeanOptionClosed computes the closed-form solution for European option pricing
-    % using the Black-Scholes formula.
+    % using the Black-76 formula.
 
     % Inputs:
     %   F0    - Current forward price of the underlying asset

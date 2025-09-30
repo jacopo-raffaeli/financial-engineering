@@ -1,10 +1,12 @@
 function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag) 
-    % EuropeanOptionCRR computes the price of a European option using the Cox-Ross-Rubinstein (CRR) binomial tree model.
+    % EuropeanOptionCRR computes the price of a European option using the 
+    % Cox-Ross-Rubinstein (CRR) binomial tree model.
 
     % Inputs:
     %   F0    - Current forward price of the underlying asset
     %   K     - Strike price of the option
     %   B     - Discount factor
+    %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
     %   N     - Number of time steps in the binomial tree
     %   flag  - '+1' for call option, '-1' for put option
