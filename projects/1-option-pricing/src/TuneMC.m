@@ -18,7 +18,7 @@ function M = TuneMC(F0, K, B, T, sigma, flag)
     m = 0;
     M = 0; 
     tol = 1e-4;
-    maxIt = 10; 
+    maxIt = 20; 
     it = 0;
     err = Inf;
 
@@ -31,7 +31,7 @@ function M = TuneMC(F0, K, B, T, sigma, flag)
         m = m + 1;
         M = 2^m;
 
-        % Compute the MC option price with M time steps and its standard error
+        % Compute the MC option price with M simulations and its standard error
         [optionPriceMC, err] = EuropeanOptionMC(F0, K, B, T, sigma, M, flag);        
 
         % Increment iteration counter
