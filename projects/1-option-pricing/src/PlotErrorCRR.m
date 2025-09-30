@@ -12,3 +12,21 @@ function [M, errorCRR] = PlotErrorCRR(F0, K, B, T, sigma)
     % Outputs:
     %   M        - 
     %   errorCRR -
+    
+    % Initialize variables
+    m = 1:10;
+    M = 2.^m;
+    errorCRR = zeros(length(M));
+    optionType = 1;
+
+    % Calculate the Black-76 price for reference
+    optionPriceBLK = EuropeanOptionClosed(F0, K, B, T, sigma, optionType);
+
+    for i = 1:length(M)
+        % Compute the CRR option price with M time steps
+        optionPriceCRR = EuropeanOptionCRR(F0, K, B, T, sigma, M(i), optionType);
+        
+        % Store price error
+        errorCRR(i) = abs(optionPriceBLK - optionPriceCRR);
+    end    
+end

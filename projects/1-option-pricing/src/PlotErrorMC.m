@@ -11,4 +11,19 @@ function [M, stdEstim] = PlotErrorMC(F0, K, B, T, sigma)
 
     % Outputs:
     %   M        - 
-    %   errorCRR -
+    %   stdEstim -
+
+    % Initialize variables
+    m = 1:20;
+    M = 2.^m;
+    stdEstim = zeros(length(M));
+    optionType = 1;
+
+    for i = 1:length(M)
+        % Compute the CRR option price with M time steps
+        [~, std] = EuropeanOptionMC(F0, K, B, T, sigma, M(i), optionType);
+        
+        % Store price error
+        stdEstim(i) = std;
+    end    
+end    
