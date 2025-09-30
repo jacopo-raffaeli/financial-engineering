@@ -12,7 +12,7 @@ function [optionPrice, std] = EuropeanOptionMC(F0, K, B, T, sigma, N, flag)
 
     % Outputs:
     %   optionPrice - The computed price of the European option
-    %   std         - The standard error of the Monte Carlo estimate
+    %   std         - The standard error of the MC estimate
 
     % Generate N standard normal random variables
     Z = randn(N, 1);
