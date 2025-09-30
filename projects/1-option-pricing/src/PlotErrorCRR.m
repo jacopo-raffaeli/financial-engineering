@@ -1,5 +1,6 @@
 function [M, errorCRR] = PlotErrorCRR(F0, K, B, T, sigma)
-    % 
+    % PlotErrorCRR computes the absolute pricing errors of European option prices
+    % using the Cox-Ross-Rubinstein (CRR) binomial model for increasing numbers of time steps.
 
     % Inputs:
     %   F0    - Current forward price of the underlying asset
@@ -10,8 +11,8 @@ function [M, errorCRR] = PlotErrorCRR(F0, K, B, T, sigma)
     %   flag  - '+1' for call option, '-1' for put option
 
     % Outputs:
-    %   M        - 
-    %   errorCRR -
+    %   M        - Vector of number of time steps used in the CRR model
+    %   errorCRR - Vector of absolute pricing errors between CRR and Black-76 prices
     
     % Initialize variables
     m = 1:10;
