@@ -16,7 +16,8 @@ function M = TuneCRR(F0, K, B, T, sigma, flag)
     %   M - The number of time steps required in the CRR model
 
     % Initialize variables
-    M = 1; 
+    m = 0;
+    M = 0; 
     tol = 1e-4;
     maxIt = 10; 
     it = 0;
@@ -28,7 +29,8 @@ function M = TuneCRR(F0, K, B, T, sigma, flag)
     % Iterate to find the required number of time steps
     while err > tol && it < maxIt
         % Increment the number of time steps
-        M = M*10;
+        m = m + 1;
+        M = 2^m;
 
         % Compute the CRR option price with M time steps
         optionPriceCRR = EuropeanOptionCRR(F0, K, B, T, sigma, M, flag);
