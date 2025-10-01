@@ -44,7 +44,7 @@ function M = TuneMC(F0, K, B, T, sigma, flag)
     end
 
     % Display results
-    fprintf('CRR steps: %d \nBlack-76 Price: %.4f € \nCRR Price: %.4f € \nError: %.6f\n', ...
+    fprintf('MC steps: %d \nBlack-76 Price: %.4f € \nMC Price: %.4f € \nError: %.6f\n', ...
             M, optionPriceBLK, optionPriceMC, err);
 
 end
