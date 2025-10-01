@@ -24,18 +24,15 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
     p = (1 - d) / (u - d);
     
     % Compute asset prices at maturity
-    assetPrices = zeros(N + 1, 1);
-    for i = 0:N
-        assetPrices(i + 1) = F0 * (u^i) * (d^(N - i));
-    end
+    FT = F0 * u.^(-N:2:N);
 
     % Compute option values at maturity
+    % Call option payoff
     if flag == 1
-        % Call option payoff
-        optionValues = max(assetPrices - K, 0);
+        optionValues = max(FT - K, 0);
+    % Put option payoff
     elseif flag == -1
-        % Put option payoff
-        optionValues = max(K - assetPrices, 0);
+        optionValues = max(K - FT, 0);
     else
         error('Invalid flag. Use +1 for call option and -1 for put option.');
     end
@@ -44,4 +41,6 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
     for step = N:-1:1
         optionValues = (p * optionValues(2:step + 1) + (1 - p) * optionValues(1:step));
     end
+
     optionPrice = B * optionValues(1);
+end
