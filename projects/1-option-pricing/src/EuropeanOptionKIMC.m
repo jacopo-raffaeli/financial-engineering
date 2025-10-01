@@ -23,6 +23,7 @@ function optionPrice = EuropeanOptionKIMC(S0, K, KI, r, q, T, sigma, N)
     % Simulate the underlying asset price at maturity
     nSim = 1e5;
     Z = randn(nSim, N);
+    Z = [Z; -Z];
     F = S0 * exp(cumsum((r - q - 0.5 * sigma^2) * dt + sigma * sqrt(dt) * Z, 2));
     FT = F(:, end);
 
