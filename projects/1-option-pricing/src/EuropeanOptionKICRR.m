@@ -1,4 +1,4 @@
-function optionPrice = EuropeanOptionKICRR(S0, K, KI, r, q, T, sigma, N)
+function optionPrice = EuropeanOptionKICRR(S0, K, KI, r, q, T, sigma, nStep)
     % EuropeanOptionKICRR computes the price of a European knock-in call 
     % option using Monte Carlo simulation.
 
@@ -16,7 +16,7 @@ function optionPrice = EuropeanOptionKICRR(S0, K, KI, r, q, T, sigma, N)
 
     % Calculate parameters for the binomial tree
     % Time step
-    dt = T / N;
+    dt = T / nStep;
     % Up and down factors
     u = exp(sigma * sqrt(dt));
     d = 1 / u;
@@ -25,9 +25,9 @@ function optionPrice = EuropeanOptionKICRR(S0, K, KI, r, q, T, sigma, N)
     p = (a - d) / (u - d);
     
     % Compute asset prices
-    tree = zeros(N+1,N+1);
+    tree = zeros(nStep+1,nStep+1);
     tree(1,1) = S0;
-    for i = 1:N
+    for i = 1:nStep
         S = S0 * u.^(i:-2:-i);
         for j = 1:i+1
             tree(j,i+1) = S(j);
@@ -40,7 +40,7 @@ function optionPrice = EuropeanOptionKICRR(S0, K, KI, r, q, T, sigma, N)
     optionValues = max(ST - K, 0) .* idxKI;
 
     % Backward induction to calculate option price at the root
-    for step = N:-1:1
+    for step = nStep:-1:1
         idxKI = tree(1:step, step) <= KI;
         optionValues = (p * optionValues(1:step) + (1 - p) * optionValues(2:step + 1));
         optionValues = optionValues .* idxKI;
