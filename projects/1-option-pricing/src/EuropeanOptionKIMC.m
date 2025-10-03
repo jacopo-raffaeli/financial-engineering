@@ -1,4 +1,4 @@
-function optionPrice = EuropeanOptionKIMC(S0, K, KI, r, q, T, sigma, nSim, nStep)
+function optionPrice = EuropeanOptionKIMC(S0, K, KI, r, q, T, sigma, nStep, nSim)
     % EuropeanOptionKIMC computes the price of a European knock-in call 
     % option using Monte Carlo simulation.
 
