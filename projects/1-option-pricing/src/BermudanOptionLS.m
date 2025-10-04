@@ -1,19 +1,20 @@
-function optionPrice = BermudanOptionLS(S0, K, r, q, T, sigma)
-    % EuropeanOptionKIClosed computes the price of a European knock-in call 
-    % option using Monte Carlo simulation.
+function optionPrice = BermudanOptionLS(S0, K, r, q, T, sigma, nSim, nStep)
+    % Computes the price of a Bermudan call option using the Longstaff-Schwartz
+    % least-squares Monte Carlo method from Financial Toolbox.
 
     % Inputs:
     %   S0    - Current spot price of the underlying asset
     %   K     - Strike price of the option
-    %   KI    - Knock-in barrier level
-    %   r
-    %   q
+    %   r     - Risk-free interest rate (annualized)
+    %   q     - Continuous dividend yield (annualized)
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
+    %   nStep - Number of steps in the binomial tree
 
     % Outputs:
     %   optionPrice - The computed price of the call option
     
+    % Dummy Settle and Maturity dates
     Settle   = datetime(0,1,1);        
     Maturity = Settle + calmonths(round(T*12)); 
     
@@ -35,7 +36,9 @@ function optionPrice = BermudanOptionLS(S0, K, r, q, T, sigma)
     ExerciseDates = (Settle + calmonths(1:round(T * 12)));   
 
     % Price the option
-    optionPrice = optstockbyls(RateSpec, StockSpec, OptSpec, K, Settle, ExerciseDates, 'NumTrials', 1e3, 'NumPeriods', 1e3, 'Antithetic', true);
+    optionPrice = optstockbyls(RateSpec, StockSpec, OptSpec, K, Settle, ...
+    ExerciseDates, 'NumTrials', nSim, 'NumPeriods', nStep, 'Antithetic', true);
+    
 end
 
     

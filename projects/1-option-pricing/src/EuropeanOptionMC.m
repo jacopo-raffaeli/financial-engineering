@@ -1,11 +1,11 @@
 function [optionPrice, std] = EuropeanOptionMC(S0, K, r, q, T, sigma, nSim, flag) 
-    % EuropeanOptionMC computes the price of a European option using Monte Carlo
-    % simulation.
+    % Computes the price of a European option using Monte Carlo simulation.
 
     % Inputs:
-    %   F0    - Current forward price of the underlying asset
+    %   S0    - Current spot price of the underlying asset
     %   K     - Strike price of the option
-    %   B     - Discount factor
+    %   r     - Risk-free interest rate (annualized)
+    %   q     - Continuous dividend yield (annualized)
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
     %   N     - Number of simulations
@@ -16,25 +16,30 @@ function [optionPrice, std] = EuropeanOptionMC(S0, K, r, q, T, sigma, nSim, flag
     %   std         - The standard error of the MC estimate
 
     % Generate N standard normal random variables
-    Z = randn(1, nSim);
+    Z = randn(nSim, 1);
+
+    % Compute forward price
+    F0 = S0 * exp((r - q) * T);
 
     % Simulate the underlying asset price at maturity
-    F0 = S0 * exp((r - q) * T);
     FT = F0 * exp(( - 0.5 * sigma^2) * T + sigma * sqrt(T) * Z);
 
-    % Calculate the payoff for each simulation
+    % Compute the payoffs
+    % Call option payoff
     if flag == 1
-        % Call option payoff
-        payoffs = max(FT - K, 0); 
+        payoffs = max(FT - K, 0);
+    % Put option payoff 
     elseif flag == -1
-        % Put option payoff
-        payoffs = max(K - FT, 0); 
+        payoffs = max(K - FT, 0);
+    % Invalid flag 
     else
         error('Invalid flag. Use +1 for call option and -1 for put option.');
     end
 
-    % Discount the average payoff back to present value
+    % Discount factor
     B = exp(-r * T);
+
+    % Discount the average payoff back to present value
     optionPrice = B * mean(payoffs);
 
     % Compute variance and standard deviation of the payoffs

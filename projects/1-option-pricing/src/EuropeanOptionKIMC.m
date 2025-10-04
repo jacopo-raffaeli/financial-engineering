@@ -1,24 +1,23 @@
 function optionPrice = EuropeanOptionKIMC(S0, K, KI, r, q, T, sigma, nStep, nSim)
-    % EuropeanOptionKIMC computes the price of a European knock-in call 
-    % option using Monte Carlo simulation.
+    % Computes the price of a European knock-in call option using the Monte Carlo
+    % simulation method.
 
     % Inputs:
     %   S0    - Current spot price of the underlying asset
     %   K     - Strike price of the option
     %   KI    - Knock-in barrier level
-    %   r
-    %   q
+    %   r     - Risk-free interest rate (annualized)
+    %   q     - Continuous dividend yield (annualized)
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
-    %   N     - Number of time steps in the simulation
+    %   nStep - Number of time steps in the simulation
+    %   nSim  - Number of simulated paths
 
     % Outputs:
     %   optionPrice - The computed price of the call option
 
-    % Time increment
+    % Time step
     dt = T / nStep;
-
-    B = exp(-r * T);
 
     % Simulate the underlying asset price at maturity path-wise (for memory limitations)
     Smax = zeros(1, nSim);
@@ -33,6 +32,9 @@ function optionPrice = EuropeanOptionKIMC(S0, K, KI, r, q, T, sigma, nStep, nSim
     % Check if the knock-in barrier was breached
     idxKI = Smax >= KI;
     payoffs = max(ST - K, 0) .* idxKI;
+
+    % Discount factor
+    B = exp(-r * T);
 
     % Discount the expected payoff to present value
     optionPrice = B * mean(payoffs);

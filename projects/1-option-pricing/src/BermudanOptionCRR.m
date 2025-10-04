@@ -1,32 +1,35 @@
 function optionPrice = BermudanOptionCRR(S0, K, r, q, T, sigma, nStepPerMonth) 
-    % EuropeanOptionCRR computes the price of a European option using the 
+    % Computes the price of a Bermudan call option using the
     % Cox-Ross-Rubinstein (CRR) binomial tree model.
 
     % Inputs:
-    %   F0    - Current forward price of the underlying asset
-    %   K     - Strike price of the option
-    %   B     - Discount factor
-    %   T     - Time to maturity (in years)
-    %   sigma - Volatility of the underlying asset (annualized)
-    %   N     - Number of time steps in the binomial tree
-    %   flag  - '+1' for call option, '-1' for put option
+    %   S0            - Current spot price of the underlying asset
+    %   K             - Strike price of the option
+    %   r             - Risk-free interest rate (annualized)
+    %   q             - Continuous dividend yield (annualized)
+    %   T             - Time to maturity (in years)
+    %   sigma         - Volatility of the underlying asset (annualized)
+    %   nStepPerMonth - Number of steps per month in the binomial tree
 
     % Outputs:
-    %   optionPrice - The computed price of the European option
+    %   optionPrice - The computed price of the call option
 
     % Calculate parameters for the binomial tree
+
     % Time step
     nMonths = floor(T * 12);
     nStep = nMonths * nStepPerMonth;
     dt = T / nStep;
+
     % Up and down factors
     u = exp(sigma * sqrt(dt));
     d = 1 / u;
-    % Risk-neutral probability
+    
+    % Risk-neutral up probability
     a = exp((r - q) * dt);
     p = (a - d) / (u - d);
     
-    % Compute asset prices
+    % Compute forward tree
     tree = zeros(nStep+1,nStep+1);
     tree(1,1) = S0;
     for i = 1:nStep
@@ -38,8 +41,12 @@ function optionPrice = BermudanOptionCRR(S0, K, r, q, T, sigma, nStepPerMonth)
 
     % Compute option values at maturity
     ST = tree(:, end);
-    B = exp(-r * dt);
     optionValues = max(ST - K, 0);
+
+    % Discount factor
+    B = exp(-r * dt);
+
+    % Determine exercise steps (monthly)
     exerciseSteps = round((1:nMonths) * (T/ nMonths) / dt);
 
     % Backward induction to calculate option price at the root
@@ -52,4 +59,5 @@ function optionPrice = BermudanOptionCRR(S0, K, r, q, T, sigma, nStepPerMonth)
     end
 
     optionPrice = optionValues(1);
+    
 end

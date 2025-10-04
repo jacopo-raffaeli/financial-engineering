@@ -1,19 +1,19 @@
 function nStep = TuneCRR(S0, K, r, q, T, sigma, flag)
-    % tuneCRR determines the number of time steps (M) required in the
-    % Cox-Ross-Rubinstein (CRR) binomial tree model to achieve an
-    % option price within a specified error tolerance (1bsp) compared to the 
-    % Black-76 price.
+    % Determines the number of time steps required in the Cox-Ross-Rubinstein 
+    % binomial tree model to achieve an option price within a specified error 
+    % tolerance compared to the Black-76 price.
 
     % Inputs:
-    %   F0    - Current forward price of the underlying asset
+    %   S0    - Current spot price of the underlying asset
     %   K     - Strike price of the option
-    %   B     - Discount factor
+    %   r     - Risk-free interest rate (annualized)
+    %   q     - Continuous dividend yield (annualized)
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
     %   flag  - '+1' for call option, '-1' for put option
 
     % Outputs:
-    %   M - The number of time steps required in the CRR model
+    %   nStep- The number of time steps required in the CRR model
 
     % Initialize variables
     m = 0;
@@ -23,7 +23,7 @@ function nStep = TuneCRR(S0, K, r, q, T, sigma, flag)
     it = 0;
     err = Inf;
 
-    % Calculate the Black-76 price for reference
+    % Compute the Black-76 price for reference
     optionPriceBLK = EuropeanOptionClosed(S0, K, r, q, T, sigma, flag);
 
     % Iterate to find the required number of time steps
@@ -48,7 +48,7 @@ function nStep = TuneCRR(S0, K, r, q, T, sigma, flag)
     end
 
     % Display results
-    fprintf('CRR steps: %d \nBlack-76 Price: %.4f € \nCRR Price: %.4f € \nError: %.6f\n', ...
+    fprintf('CRR tuned steps: %d \nBlack-76 Price: %.4f € \nCRR Price: %.4f € \nError: %.6f\n', ...
             nStep, optionPriceBLK, optionPriceCRR, err);
 
 end

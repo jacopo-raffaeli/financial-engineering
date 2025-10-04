@@ -1,18 +1,19 @@
-function nSim = TuneMCAV(S0, K, r, q, T, sigma, flag)
-    % tuneMC determines the number of simulations (M) required in the
-    % MC model to achieve an option price within a specified error 
-    % tolerance (1bsp) measuered as the standard error of the MC estimate.
+function nSim = TuneMCAV(S0, K, r, q, T, sigma, flag)    
+    % Determines the number of simulations required in the MC model with 
+    % Antithetic Variates to achieve an option price within a specified error 
+    % tolerance measured as the standard error of the MC estimate.
     
     % Inputs:
-    %   F0    - Current forward price of the underlying asset
+    %   S0    - Current spot price of the underlying asset
     %   K     - Strike price of the option
-    %   B     - Discount factor
+    %   r     - Risk-free interest rate (annualized)
+    %   q     - Continuous dividend yield (annualized)
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
     %   flag  - '+1' for call option, '-1' for put option
 
     % Outputs:
-    %   M - The number of simulations required in the MC model
+    %   nSim - The number of simulations required in the MC model
 
     % Initialize variables
     m = 0;

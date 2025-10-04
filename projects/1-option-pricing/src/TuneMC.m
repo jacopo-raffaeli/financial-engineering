@@ -1,12 +1,13 @@
 function nSim = TuneMC(S0, K, r, q, T, sigma, flag)
-    % tuneMC determines the number of simulations (M) required in the
-    % MC model to achieve an option price within a specified error 
-    % tolerance (1bsp) measured as the standard error of the MC estimate.
+    % Determines the number of simulations required in the MC model 
+    % to achieve an option price within a specified error tolerance measured as 
+    % the standard error of the MC estimate.
     
     % Inputs:
-    %   F0    - Current forward price of the underlying asset
+    %   S0    - Current spot price of the underlying asset
     %   K     - Strike price of the option
-    %   B     - Discount factor
+    %   r     - Risk-free interest rate (annualized)
+    %   q     - Continuous dividend yield (annualized)
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
     %   flag  - '+1' for call option, '-1' for put option
@@ -44,7 +45,7 @@ function nSim = TuneMC(S0, K, r, q, T, sigma, flag)
     end
 
     % Display results
-    fprintf('MC steps: %d \nBlack-76 Price: %.4f € \nMC Price: %.4f € \nError: %.6f\n', ...
+    fprintf('MC tuned steps: %d \nBlack-76 Price: %.4f € \nMC Price: %.4f € \nError: %.6f\n', ...
             nSim, optionPriceBLK, optionPriceMC, err);
 
 end

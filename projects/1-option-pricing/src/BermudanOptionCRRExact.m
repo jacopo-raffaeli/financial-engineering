@@ -1,19 +1,20 @@
 function optionPrice = BermudanOptionCRRExact(S0, K, r, q, T, sigma, nStep)
-    % EuropeanOptionKIClosed computes the price of a European knock-in call 
-    % option using Monte Carlo simulation.
+    % Computes the price of a Bermudan call option using the
+    % Cox-Ross-Rubinstein (CRR) binomial tree model from Financial Toolbox.
 
     % Inputs:
     %   S0    - Current spot price of the underlying asset
     %   K     - Strike price of the option
-    %   KI    - Knock-in barrier level
-    %   r
-    %   q
+    %   r     - Risk-free interest rate (annualized)
+    %   q     - Continuous dividend yield (annualized)
     %   T     - Time to maturity (in years)
     %   sigma - Volatility of the underlying asset (annualized)
+    %   nStep - Number of steps in the binomial tree
 
     % Outputs:
     %   optionPrice - The computed price of the call option
     
+    % Dummy Settle and Maturity dates
     Settle   = datetime(0,1,1);        
     Maturity = Settle + calmonths(round(T*12)); 
     
@@ -31,7 +32,7 @@ function optionPrice = BermudanOptionCRRExact(S0, K, r, q, T, sigma, nStep)
     % Time specification
     TimeSpec = crrtimespec(Settle, Maturity, nStep);
 
-    % Construct CRR binomial tree with monthly steps
+    % Construct CRR binomial tree
     Tree = crrtree(StockSpec, RateSpec, TimeSpec);
     
     % Option specification
@@ -42,6 +43,7 @@ function optionPrice = BermudanOptionCRRExact(S0, K, r, q, T, sigma, nStep)
 
     % Price the option
     optionPrice = optstockbycrr(Tree, OptSpec, K, Settle, ExerciseDates);
+    
 end
 
     
