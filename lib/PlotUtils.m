@@ -2,7 +2,7 @@ classdef PlotUtils
     methods(Static)
         
         function setStyle()
-            % Apply consistent academic style to current axes
+            % Apply consistent style to current axes
             set(gca,'FontName','Times New Roman','FontSize',12, ...
                 'LineWidth',1,'Box','off','TickDir','out');
             set(findall(gca,'Type','Line'),'LineWidth',1.5);
@@ -58,7 +58,6 @@ classdef PlotUtils
                 ax.XColor = 'k';          
                 ax.YColor = 'k';            
                 ax.ZColor = 'k';
-                ax.Title
                 ax.FontSize = 12;
                 ax.FontName = 'Times New Roman';
             end

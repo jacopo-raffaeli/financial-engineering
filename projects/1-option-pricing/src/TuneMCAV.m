@@ -1,4 +1,4 @@
-function M = TuneMCAV(F0, K, B, T, sigma, flag)
+function nSim = TuneMCAV(S0, K, r, q, T, sigma, flag)
     % tuneMC determines the number of simulations (M) required in the
     % MC model to achieve an option price within a specified error 
     % tolerance (1bsp) measuered as the standard error of the MC estimate.
@@ -16,23 +16,23 @@ function M = TuneMCAV(F0, K, B, T, sigma, flag)
 
     % Initialize variables
     m = 0;
-    M = 0; 
+    nSim = 0; 
     tol = 1e-4;
     maxIt = 20; 
     it = 0;
     err = Inf;
 
     % Calculate the Black-76 price for reference
-    optionPriceBLK = EuropeanOptionClosed(F0, K, B, T, sigma, flag);
+    optionPriceBLK = EuropeanOptionClosed(S0, K, r, q, T, sigma, flag);
 
     % Iterate to find the required number of time steps
     while err > tol && it < maxIt
         % Increment the number of time steps
         m = m + 1;
-        M = 2^m;
+        nSim = 2^m;
 
         % Compute the MC option price with M simulations and its standard error
-        [optionPriceMC, err] = EuropeanOptionMCAV(F0, K, B, T, sigma, M, flag);        
+        [optionPriceMC, err] = EuropeanOptionMCAV(S0, K, r, q, T, sigma, nSim, flag);        
 
         % Increment iteration counter
         it = it + 1;
@@ -45,6 +45,6 @@ function M = TuneMCAV(F0, K, B, T, sigma, flag)
 
     % Display results
     fprintf('MC AV steps: %d \nBlack-76 Price: %.4f € \nMC AV Price: %.4f € \nError: %.6f\n', ...
-            M, optionPriceBLK, optionPriceMC, err);
+            nSim, optionPriceBLK, optionPriceMC, err);
 
 end

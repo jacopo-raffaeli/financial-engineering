@@ -1,4 +1,4 @@
-function [optionPrice, std] = EuropeanOptionMCAV(F0, K, B, T, sigma, N, flag) 
+function [optionPrice, std] = EuropeanOptionMCAV(S0, K, r, q, T, sigma, nSim, flag) 
     % EuropeanOptionMC computes the price of a European option using Monte Carlo simulation.
 
     % Inputs:
@@ -15,9 +15,10 @@ function [optionPrice, std] = EuropeanOptionMCAV(F0, K, B, T, sigma, N, flag)
     %   std         - The standard error of the MC estimate
 
     % Generate N standard normal random variables
-    Z = randn(N, 1);
+    Z = randn(nSim, 1);
 
     % Simulate the underlying asset price at maturity
+    F0 = S0 * exp((r - q) * T);
     FT1 = F0 * exp(( - 0.5 * sigma^2) * T + sigma * sqrt(T) * Z);
     FT2 = F0 * exp(( - 0.5 * sigma^2) * T + sigma * sqrt(T) * -Z);
 
@@ -36,10 +37,11 @@ function [optionPrice, std] = EuropeanOptionMCAV(F0, K, B, T, sigma, N, flag)
 
     % Discount the average payoff back to present value
     payoffs = (payoffs1 + payoffs2) / 2;
+    B = exp(-r * T);
     optionPrice = B * mean(payoffs);
 
     % Compute variance and standard deviation of the payoffs
-    var = (1/(N*(N-1)))*sum((payoffs - mean(payoffs)).^2);
+    var = (1 / (nSim * (nSim - 1))) * sum((payoffs - mean(payoffs)).^2);
     std = sqrt(var);
 
 end

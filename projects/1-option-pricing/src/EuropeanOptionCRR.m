@@ -1,4 +1,4 @@
-function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag) 
+function optionPrice = EuropeanOptionCRR(S0, K, r, q, T, sigma, nStep, flag) 
     % EuropeanOptionCRR computes the price of a European option using the 
     % Cox-Ross-Rubinstein (CRR) binomial tree model.
 
@@ -16,7 +16,7 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
 
     % Calculate parameters for the binomial tree
     % Time step
-    dt = T / N;
+    dt = T / nStep;
     % Up and down factors
     u = exp(sigma * sqrt(dt));
     d = 1 / u;
@@ -24,7 +24,8 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
     p = (1 - d) / (u - d);
     
     % Compute asset prices at maturity
-    FT = F0 * u.^(-N:2:N);
+    F0 = S0 * exp((r - q) * T);
+    FT = F0 * u.^(nStep:-2:-nStep);
 
     % Compute option values at maturity
     % Call option payoff
@@ -38,9 +39,10 @@ function optionPrice = EuropeanOptionCRR(F0, K, B, T, sigma, N, flag)
     end
 
     % Backward induction to calculate option price at the root
-    for step = N:-1:1
-        optionValues = (p * optionValues(2:step + 1) + (1 - p) * optionValues(1:step));
+    B = exp(-r * dt);
+    for step = nStep:-1:1
+        optionValues = B * (p * optionValues(1:step) + (1 - p) * optionValues(2:step + 1));
     end
 
-    optionPrice = B * optionValues(1);
+    optionPrice = optionValues(1);
 end

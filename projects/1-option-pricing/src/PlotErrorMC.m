@@ -1,4 +1,4 @@
-function [M, stdEstim] = PlotErrorMC(F0, K, B, T, sigma)
+function [nSim, stdEstim] = PlotErrorMC(S0, K, r, q, T, sigma)
     % PlotErrorMC computes the standard deviation estimates of European option prices
     % using the Monte Carlo method for increasing numbers of simulations.
 
@@ -16,13 +16,13 @@ function [M, stdEstim] = PlotErrorMC(F0, K, B, T, sigma)
 
     % Initialize variables
     m = 1:20;
-    M = 2.^m;
-    stdEstim = zeros(length(M));
+    nSim = 2.^m;
+    stdEstim = zeros(1, length(nSim));
     optionType = 1;
 
-    for i = 1:length(M)
+    for i = 1:length(nSim)
         % Compute the CRR option price with M time steps
-        [~, std] = EuropeanOptionMC(F0, K, B, T, sigma, M(i), optionType);
+        [~, std] = EuropeanOptionMC(S0, K, r, q, T, sigma, nSim(i), optionType);
         
         % Store price error
         stdEstim(i) = std;

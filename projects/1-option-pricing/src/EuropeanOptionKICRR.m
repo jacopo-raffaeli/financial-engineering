@@ -40,12 +40,12 @@ function optionPrice = EuropeanOptionKICRR(S0, K, KI, r, q, T, sigma, nStep)
     optionValues = max(ST - K, 0) .* idxKI;
 
     % Backward induction to calculate option price at the root
+    B = exp(-r * dt);
     for step = nStep:-1:1
         idxKI = tree(1:step, step) <= KI;
-        optionValues = (p * optionValues(1:step) + (1 - p) * optionValues(2:step + 1));
+        optionValues = B * (p * optionValues(1:step) + (1 - p) * optionValues(2:step + 1));
         optionValues = optionValues .* idxKI;
     end
 
-    B = exp(-r * T);
-    optionPrice = EuropeanOptionClosed(S0*exp((r-q)*T), K, B, T, sigma, 1) - B * optionValues(1);
+    optionPrice = EuropeanOptionClosed(S0, K, r, q, T, sigma, 1) - optionValues(1);
 end

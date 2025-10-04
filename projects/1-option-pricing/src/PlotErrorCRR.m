@@ -1,4 +1,4 @@
-function [M, errorCRR] = PlotErrorCRR(F0, K, B, T, sigma)
+function [nStep, errorCRR] = PlotErrorCRR(S0, K, r, q, T, sigma)
     % PlotErrorCRR computes the absolute pricing errors of European option prices
     % using the Cox-Ross-Rubinstein (CRR) binomial model for increasing numbers of time steps.
 
@@ -16,16 +16,16 @@ function [M, errorCRR] = PlotErrorCRR(F0, K, B, T, sigma)
     
     % Initialize variables
     m = 1:10;
-    M = 2.^m;
-    errorCRR = zeros(length(M));
+    nStep = 2.^m;
+    errorCRR = zeros(1, length(nStep));
     optionType = 1;
 
     % Calculate the Black-76 price for reference
-    optionPriceBLK = EuropeanOptionClosed(F0, K, B, T, sigma, optionType);
+    optionPriceBLK = EuropeanOptionClosed(S0, K, r, q, T, sigma, optionType);
 
-    for i = 1:length(M)
+    for i = 1:length(nStep)
         % Compute the CRR option price with M time steps
-        optionPriceCRR = EuropeanOptionCRR(F0, K, B, T, sigma, M(i), optionType);
+        optionPriceCRR = EuropeanOptionCRR(S0, K, r, q, T, sigma, nStep(i), optionType);
         
         % Store price error
         errorCRR(i) = abs(optionPriceBLK - optionPriceCRR);
