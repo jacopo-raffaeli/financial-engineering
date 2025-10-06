@@ -23,4 +23,4 @@
 Thumbs.db
 
 # Folder template
-projects\project-template\
+projects/project-template/
