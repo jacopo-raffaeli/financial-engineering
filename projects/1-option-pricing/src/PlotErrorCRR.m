@@ -20,7 +20,7 @@ function [nStep, errorCRR] = PlotErrorCRR(S0, K, r, q, T, sigma)
     errorCRR = zeros(1, length(nStep));
 
     % Calculate the Black-76 price for reference
-    optionPriceBLK = EuropeanOptionClosed(S0, K, r, q, T, sigma, optionType);
+    optionPriceBLK = EuropeanOptionClosed(S0, K, r, q, T, sigma, 1);
 
     for i = 1:length(nStep)
         % Compute the CRR option price with M time steps

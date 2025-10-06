@@ -18,7 +18,7 @@ function gamma = GammaKI(S0, K, KI, r, q, T, sigma, nSim, nStep, flagNum)
     %   gamma   - The computed gamma of the European option with knock-in barrier
 
     % Optimal h for finite difference
-    h = sqrt(eps);
+    h = 1e-2;
 
     % Perturbed spot prices
     S0mh = S0 - h;
