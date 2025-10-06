@@ -13,20 +13,28 @@ Each project is self-contained, featuring reproducible code, results, and visual
 ```
 financial-engineering/
 │
+├── docs/       # Additional documentation
 ├── lib/        # Shared MATLAB functions
 ├── projects/   # Individual project folders
-└── docs/       # Additional documentation
+├── .gitignore   
+└── README.md
 ```
 
 Each project folder typically includes:
+
 ```
 project-name/
 │
-├── README.md    # Project description and instructions
-├── Main.mlx     # MATLAB live script demonstrating workflow and results
-├── src/         # MATLAB functions and scripts
-├── data/        # Input datasets
-└── results/     # Generated outputs, plots, metrics
+├── data/           
+│   ├── raw/
+│   ├── interim/    
+│   └── processed/
+├── results/        # Generated outputs, plots, metrics
+│   ├── figures/
+│   └── report.md   # Exported main.mlx for visualization  
+├── src/            # MATLAB functions and scripts
+├── main.mlx        # MATLAB live script demonstrating workflow and results
+└── README.md       # Project description and instructions
 ```
 
 ---
@@ -35,7 +43,7 @@ project-name/
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/financial-engineering.git
+    git clone https://github.com/jacopo-raffaeli/financial-engineering.git
     ```
 2. Open MATLAB and navigate to the desired project folder.
 3. Run the `Main.mlx` live script to reproduce results and visualizations.
@@ -44,8 +52,8 @@ project-name/
 
 ## Projects
 
-- <!-- Add project name and brief description here -->
-- <!-- Add project name and brief description here -->
-- <!-- Add project name and brief description here -->
+1. [Option Pricing](projects\1-option-pricing\README.md)
+2. [Interest Rates Bootstrap](projects\2-interest-rates-bootstrap\README.md)
+3. <!-- Add project name and brief description here -->
 
 
