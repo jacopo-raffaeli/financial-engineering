@@ -5,6 +5,7 @@
 *.fig
 *.mlappinstall
 *.mlx~
+*.slx~
 
 # Backup and autosave files
 *~
