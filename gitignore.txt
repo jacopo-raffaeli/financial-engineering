@@ -21,3 +21,6 @@
 # OS-specific
 .DS_Store
 Thumbs.db
+
+# Folder template
+./project-template
