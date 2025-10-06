@@ -51,7 +51,27 @@ Price a European Call Option with the following characteristics:
 
 ## **SETUP**
 ```matlab
-run("lib\Setup.m");
+% Initialize workspace
+clc; clear; close all;
+
+% Fix randomness
+rng('default');   
+
+% Add shared library folder
+addpath(genpath(fullfile('..','..','lib')));
+
+% Add project-specific folders
+addpath(genpath('src'));
+addpath(genpath('data'));
+addpath(genpath('results'));
+
+% Define paths
+resultsPath = fullfile('results');
+figuresPath = fullfile('results', 'figures');
+srcPath = fullfile('src');
+dataRawPath = fullfile('data', 'raw');
+dataInterimPath = fullfile('data', 'interim');
+dataProcessedPath = fullfile('data', 'processed');
 ```
 <a id="TMP_9f18"></a>
 
@@ -107,33 +127,33 @@ Price the option, considering an underlying price equal to 1 Euro (i.e a derivat
 ```matlab
 % 1.
 optionPriceBLK = EuropeanOptionClosed(S0, K, r, q, T, sigma, optionType);
-display(optionPriceBLK);
+fprintf('Closed formula price: %.4f €', optionPriceBLK);
 ```
 
 ```matlabTextOutput
-optionPriceBLK = 0.0398
+Closed formula price: 0.0398 €
 ```
 
 ```matlab
 % 2.
 nStep = 1e2;
 optionPriceCRR = EuropeanOptionCRR(S0, K, r, q, T, sigma, nStep, optionType);
-display(optionPriceCRR);
+fprintf('CRR price: %.4f €', optionPriceCRR);
 ```
 
 ```matlabTextOutput
-optionPriceCRR = 0.0398
+CRR price: 0.0398 €
 ```
 
 ```matlab
 % 3.
 nSim = 1e6;
 [optionPriceMC, ~] = EuropeanOptionMC(S0, K, r, q, T, sigma, nSim, optionType);
-display(optionPriceMC);
+fprintf('Monte Carlo price: %.4f €', optionPriceMC);
 ```
 
 ```matlabTextOutput
-optionPriceMC = 0.0398
+Monte Carlo price: 0.0397 €
 ```
 
 <a id="TMP_1567"></a>
@@ -219,22 +239,22 @@ Price also a European Call Option with European barrier at 1.3 € (UP & IN) and
 ```matlab
 % 1.
 optionPriceKIBLK = EuropeanOptionKIClosed(S0, K, KI, r, q, T, sigma);
-display(optionPriceKIBLK);
+fprintf('Closed formula price: %.4f €', optionPriceKIBLK);
 ```
 
 ```matlabTextOutput
-optionPriceKIBLK = 0.0037
+Closed formula price: 0.0037 €
 ```
 
 ```matlab
 % 2.
 nStep = 1e2;
 optionPriceKICRR = EuropeanOptionKICRR(S0, K, KI, r, q, T, sigma, nStep);
-display(optionPriceKICRR);
+fprintf('CRR price: %.4f €', optionPriceKICRR);
 ```
 
 ```matlabTextOutput
-optionPriceKICRR = 0.0037
+CRR price: 0.0037 €
 ```
 
 ```matlab
@@ -243,11 +263,11 @@ optionPriceKICRR = 0.0037
 nStep = 1e3;
 nSim = 1e6;
 optionPriceKIMC = EuropeanOptionKIMC(S0, K, KI, r, q, T, sigma, nStep, nSim);
-display(optionPriceKIMC);
+fprintf('Monte Carlo formula price: %.4f €', optionPriceKIMC);
 ```
 
 ```matlabTextOutput
-optionPriceKIMC = 0.0036
+Monte Carlo formula price: 0.0036 €
 ```
 
 <a id="TMP_3d40"></a>
@@ -346,22 +366,22 @@ Price also, with the Tree, a Bermudan option, where the holder has also the righ
 % Price with built-in CRR (for comparison)
 nStep = 3e2;
 optionPriceCRR = BermudanOptionCRRExact(S0, K, r, q, T, sigma, nStep);
-display(optionPriceCRR);
+fprintf('Financial Toolbox CRR price: %.4f €', optionPriceCRR);
 ```
 
 ```matlabTextOutput
-optionPriceCRR = 0.0400
+Financial Toolbox CRR price: 0.0400 €
 ```
 
 ```matlab
 % Price with CRR
 nStepPerMonth = 1e2;
 optionPriceCRR = BermudanOptionCRR(S0, K, r, q, T, sigma, nStepPerMonth);
-display(optionPriceCRR);
+fprintf('Implemented CRR price: %.4f €', optionPriceCRR);
 ```
 
 ```matlabTextOutput
-optionPriceCRR = 0.0401
+Implemented CRR price: 0.0401 €
 ```
 
 <a id="TMP_176b"></a>

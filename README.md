@@ -29,9 +29,11 @@ project-name/
 │   ├── raw/
 │   ├── interim/    
 │   └── processed/
+│
 ├── results/        # Generated outputs, plots, metrics
 │   ├── figures/
 │   └── report.md   # Exported main.mlx for visualization  
+│
 ├── src/            # MATLAB functions and scripts
 ├── main.mlx        # MATLAB live script demonstrating workflow and results
 └── README.md       # Project description and instructions
