@@ -52,8 +52,8 @@ project-name/
 
 ## Projects
 
-1. [Option Pricing](projects\1-option-pricing\README.md)
-2. [Interest Rates Bootstrap](projects\2-interest-rates-bootstrap\README.md)
+1. [Option Pricing](projects/1-option-pricing/README.md)
+2. [Interest Rates Bootstrap](projects/2-interest-rates-bootstrap/README.md)
 3. <!-- Add project name and brief description here -->
 
 
