@@ -5,7 +5,7 @@
 <!-- Begin Toc -->
 
 ## Table of Contents
-&emsp;[**EXERCISE 1**](#TMP_7372)
+&emsp;[**EXERCISE 1: Option Pricing**](#TMP_7372)
  
 &emsp;&emsp;[**SETUP**](#TMP_4bbe)
  
@@ -30,7 +30,7 @@
 <!-- End Toc -->
 <a id="TMP_7372"></a>
 
-# **EXERCISE 1**
+# **EXERCISE 1: Option Pricing**
 
 Price a European Call Option with the following characteristics: 
 
