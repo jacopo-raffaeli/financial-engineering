@@ -1,4 +1,4 @@
-function [dates, rates] = readExcelData(filename, dateFormat)
+function [dates, rates] = ReadExcelData(filename, dateFormat)
 % Reads financial market data from an Excel file using modern MATLAB functions.
 % All input rates are expressed in percentage units.
 
