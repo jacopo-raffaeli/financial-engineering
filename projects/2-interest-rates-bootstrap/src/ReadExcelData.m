@@ -25,7 +25,7 @@ dates.settlement = datetime(settlementCell{1}, 'InputFormat', dateFormat);
 
 % Deposit dates
 depositDatesCell = readcell(filename, 'Sheet', 1, 'Range', 'D11:D18');
-dates.deposits = datetime([depositDatesCell{:}], 'InputFormat', dateFormat);
+dates.deposits = datetime([depositDatesCell{:}], 'InputFormat', dateFormat)';
 
 % Futures start and end dates
 futuresDatesCell = readcell(filename, 'Sheet', 1, 'Range', 'Q12:R20');
@@ -38,7 +38,7 @@ end
 
 % Swap expiry dates
 swapDatesCell = readcell(filename, 'Sheet', 1, 'Range', 'D39:D88');
-dates.swaps = datetime([swapDatesCell{:}], 'InputFormat', dateFormat);
+dates.swaps = datetime([swapDatesCell{:}], 'InputFormat', dateFormat)';
 
 % Rates from Excel (Bids & Asks)
 
