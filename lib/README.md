@@ -4,6 +4,13 @@ This directory contains shared MATLAB functions and utilities used across multip
 
 ## Contents
 
+### Setup.m
+Initialization script for setting up the MATLAB workspace:
+- Clears workspace, command window, and figures
+- Sets random number generator seed for reproducibility
+- Adds shared library and project-specific folders to the MATLAB path
+- Defines path variables for common directories (results, figures, src, data)
+
 ### InitializeProject.m
 Function to initialize project environment with path management:
 - Resets MATLAB path to default
