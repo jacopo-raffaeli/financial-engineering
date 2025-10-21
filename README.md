@@ -47,8 +47,10 @@ project-name/
     ```bash
     git clone https://github.com/jacopo-raffaeli/financial-engineering.git
     ```
-2. Open MATLAB and navigate to the desired project folder.
-3. Run the `Main.mlx` live script to reproduce results and visualizations.
+2. Open MATLAB and navigate to the desired project folder (e.g., `projects/1-option-pricing/`)
+3. Open the `main.mlx` live script in MATLAB
+4. Run all sections to reproduce the analysis, figures, and results
+5. View exported results in the `results/` folder
 
 ---
 
