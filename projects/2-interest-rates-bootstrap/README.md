@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project implements interest rate curve bootstrapping techniques to construct a discount curve from market data including deposits, STIR futures, and interest rate swaps. The project includes sensitivity analysis for both swaps and coupon bonds.
+Interest rate curve bootstrapping from market data (deposits, futures, swaps) with sensitivity analysis.
 
 ## Summary 
 

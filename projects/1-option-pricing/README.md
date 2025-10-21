@@ -2,11 +2,7 @@
 
 ## Project Overview
 
-This project implements and compares various option pricing methods for European, Barrier and Bermudan options, studying greeks and numerical convergence properties through multiple approaches:
-
-* Closed-form solutions
-* Cox-Ross-Rubinstein binomial tree
-* Monte Carlo simulation
+Comparison of option pricing methods (closed-form, binomial tree, Monte Carlo) for European, Barrier and Bermudan options.
 
 ## Summary 
 
