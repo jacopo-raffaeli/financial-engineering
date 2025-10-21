@@ -8,6 +8,14 @@ Each project is self-contained, featuring reproducible code, results, and visual
 
 ---
 
+## List of Projects
+
+1. [Option Pricing](projects/1-option-pricing/README.md)
+2. [Interest Rates Bootstrap](projects/2-interest-rates-bootstrap/README.md)
+3. [...](empty)
+
+---
+
 ## Repository Structure
 
 ```
@@ -51,13 +59,5 @@ project-name/
 3. Open the `main.mlx` live script in MATLAB
 4. Run all sections to reproduce the analysis, figures, and results
 5. View exported results in the `results/` folder
-
----
-
-## Projects
-
-1. [Option Pricing](projects/1-option-pricing/README.md)
-2. [Interest Rates Bootstrap](projects/2-interest-rates-bootstrap/README.md)
-3. <!-- Add project name and brief description here -->
 
 
