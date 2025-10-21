@@ -2,11 +2,11 @@ function [dates, rates] = ReadExcelData(filename, dateFormat)
 % Reads financial market data from an Excel file using modern MATLAB functions.
 % All input rates are expressed in percentage units.
 
-% INPUTS:
+% Inputs:
 %   filename   - Excel file name where data are stored
 %   dateFormat - date format used in Excel (e.g., 'dd/MM/yyyy')
 
-% OUTPUTS:
+% Outputs:
 %   dates - struct with fields:
 %       settlement   : settlement date
 %       deposits     : deposit end dates
@@ -17,7 +17,7 @@ function [dates, rates] = ReadExcelData(filename, dateFormat)
 %       futures      : futures bid/ask implied rates
 %       swaps        : swap bid/ask rates
 
-% Dates from Excel
+%% Dates from Excel
 
 % Settlement date
 settlementCell = readcell(filename, 'Sheet', 1, 'Range', 'E8');
@@ -40,7 +40,7 @@ end
 swapDatesCell = readcell(filename, 'Sheet', 1, 'Range', 'D39:D88');
 dates.swaps = datetime([swapDatesCell{:}], 'InputFormat', dateFormat)';
 
-% Rates from Excel (Bids & Asks)
+%% Rates from Excel (Bids & Asks)
 
 % Deposit rates
 depositRates = readmatrix(filename, 'Sheet', 1, 'Range', 'E11:F18');
