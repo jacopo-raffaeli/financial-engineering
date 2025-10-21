@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository contains a curated collection of MATLAB projects focused on practical applications in financial engineering. Topics include derivatives pricing, quantitative risk management, and structured products. 
+This repository contains a curated collection of MATLAB projects focused on practical applications in financial engineering. Topics include derivatives pricing, quantitative risk management, and structured products.
 
 Each project is self-contained, featuring reproducible code, results, and visualizations. Shared functions are organized in the `lib` directory for reuse across projects.
 
@@ -10,15 +10,15 @@ Each project is self-contained, featuring reproducible code, results, and visual
 
 ## List of Projects
 
-1. [Option Pricing](projects/1-option-pricing/README.md)
-2. [Interest Rates Bootstrap](projects/2-interest-rates-bootstrap/README.md)
+1. [Option Pricing](projects/1-option-pricing)
+2. [Interest Rates Bootstrap](projects/2-interest-rates-bootstrap)
 3. [...](empty)
 
 ---
 
 ## Repository Structure
 
-```
+```bash
 financial-engineering/
 │
 ├── docs/       # Additional documentation
@@ -30,7 +30,7 @@ financial-engineering/
 
 Each project folder typically includes:
 
-```
+```bash
 project-name/
 │
 ├── data/           
@@ -52,12 +52,12 @@ project-name/
 ## Getting Started
 
 1. Clone the repository:
+
     ```bash
     git clone https://github.com/jacopo-raffaeli/financial-engineering.git
     ```
+
 2. Open MATLAB and navigate to the desired project folder (e.g., `projects/1-option-pricing/`)
 3. Open the `main.mlx` live script in MATLAB
 4. Run all sections to reproduce the analysis, figures, and results
 5. View exported results in the `results/` folder
-
-

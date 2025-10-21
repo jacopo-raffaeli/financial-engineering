@@ -13,6 +13,7 @@ Comparison of option pricing methods (closed-form, binomial tree, Monte Carlo) f
 ## Results
 
 Detailed analysis available in [results/summary.md](results/summary.md) (`main.mlx` exported), including:
+
 - Price comparisons across methods
 - Convergence plots
 - Gamma sensitivity profiles
@@ -25,5 +26,4 @@ Detailed analysis available in [results/summary.md](results/summary.md) (`main.m
 
 ## License
 
-This project is part of the [financial-engineering](../../README.md) repository.
-
+This project is part of the [financial-engineering](../..) repository.

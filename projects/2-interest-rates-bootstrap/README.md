@@ -13,6 +13,7 @@ Interest rate curve bootstrapping from market data (deposits, futures, swaps) wi
 ## Results
 
 Detailed analysis available in [results/summary.md](results/summary.md) (`main.mlx` exported), including:
+
 - Discount curve construction
 - Zero and forward rate visualization
 - Sensitivity analysis for swaps and bonds
@@ -25,5 +26,4 @@ Detailed analysis available in [results/summary.md](results/summary.md) (`main.m
 
 ## License
 
-This project is part of the [financial-engineering](../../README.md) repository.
-
+This project is part of the [financial-engineering](../..) repository.
